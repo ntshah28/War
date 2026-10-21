@@ -10,6 +10,12 @@ public class Pile extends QueueArray<Card> {
         //   Pile pile = new Pile("As 2s 3s Jh Qh Kh 4d 5d 6d 7c 8c 9c");
 
         // TODO: implement pile constructor
+
+        Scanner reader = new Scanner(cards);
+        while(reader.hasNext()) {
+            String cc = reader.next();
+            this.enqueue(new Card(cc.charAt(0),cc.charAt(1)));
+        }
     }
 
     public String toString() {
@@ -23,7 +29,20 @@ public class Pile extends QueueArray<Card> {
         //   Kc  Td  Jc  Th  9s  Kd
         // TODO: implement toString. Use a  'for (Card card : this) {}' loop to print them
         String output = "";
+        int s = this.size();
+        int count = 1;
+        for(int i = 0; i <s;i++) {
+            System.out.println(size());
+            if(count>10) {
+                output += System.lineSeparator() + this.dequeue() + "  ";
+                count=0;
+            } else {
+                output += this.dequeue() + "  ";
+            }
 
+            count++;
+        }
+        System.out.println(output);
         return output;
 
     }
