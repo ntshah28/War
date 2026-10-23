@@ -11,6 +11,19 @@ public class War {
     static int numTurns;
 
     // ADD ADDITIONAL VARIABLES HERE, IF DESIRED...
+    public static void Comparer() {
+        Card p1 = pile1.dequeue();
+        Card p2 = pile2.dequeue();
+        if(p1.compareTo(p2)>0) {
+            pile1.enqueue(p1);
+            pile1.enqueue(p2);
+        } else if (p1.compareTo(p2)<0){
+            pile2.enqueue(p2);
+            pile2.enqueue(p1);
+        }
+        numTurns++;
+    }
+    
 
     public static void printPiles() {
 
@@ -58,6 +71,11 @@ public class War {
         numTurns = 1;
 
         // TODO: ADD CODE HERE TO COMPLETE THIS METHOD...
+
+        while(!pile1.isEmpty()||!pile2.isEmpty()) {
+            Comparer();
+
+        }
 
     }
 }
