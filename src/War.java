@@ -11,19 +11,23 @@ public class War {
     static int numTurns;
 
     // ADD ADDITIONAL VARIABLES HERE, IF DESIRED...
-    public static void Comparer() {
-        Card p1 = pile1.dequeue();
-        Card p2 = pile2.dequeue();
+    public static int Comparer(Card p1, Card p2) {
+
         if(p1.compareTo(p2)>0) {
             pile1.enqueue(p1);
             pile1.enqueue(p2);
+            return 1;
         } else if (p1.compareTo(p2)<0){
             pile2.enqueue(p2);
             pile2.enqueue(p1);
+            return 2;
+        } else if(p1.compareTo(p2)==0) {
+            return -1;
         }
         numTurns++;
+        return 3;
     }
-    
+
 
     public static void printPiles() {
 
@@ -73,8 +77,38 @@ public class War {
         // TODO: ADD CODE HERE TO COMPLETE THIS METHOD...
 
         while(!pile1.isEmpty()||!pile2.isEmpty()) {
-            Comparer();
+            Card p1 = pile1.dequeue();
+            Card p2 = pile2.dequeue();
+            int i = Comparer(p1,p2);
+            while(i==-1) {
+                printWar();
+                Card p1a = pile1.dequeue();
+                Card p1b = pile1.dequeue();
+                Card p1c = pile1.dequeue();
+                Card p2a = pile2.dequeue();
+                Card p2b = pile2.dequeue();
+                Card p2c = pile2.dequeue();
 
+                Card p1d = pile1.dequeue();
+                Card p2d = pile2.dequeue();
+                i = Comparer(p1d, p2d);
+                if(i==1) {
+                    pile1.enqueue(p1a);
+                    pile1.enqueue(p1b);
+                    pile1.enqueue(p1c);
+                    pile1.enqueue(p2a);
+                    pile1.enqueue(p2b);
+                    pile1.enqueue(p2c);
+                }
+                if(i==2) {
+                    pile2.enqueue(p1a);
+                    pile2.enqueue(p1b);
+                    pile2.enqueue(p1c);
+                    pile2.enqueue(p2a);
+                    pile2.enqueue(p2b);
+                    pile2.enqueue(p2c);
+                }
+            }
         }
 
     }
